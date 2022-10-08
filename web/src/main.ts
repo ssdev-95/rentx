@@ -10,7 +10,7 @@ import erudaDOM from 'eruda-dom'
 
 createApp(App).use(router).mount('#app')
 
-if(window && window.innerWidth <= 869) {
+if (window && window.innerWidth <= 869) {
 	eruda.init()
 	eruda.add(erudaDOM)
 }
