@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+
+:root {
+  font-family: Roboto, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  padding:0;
+	margin:0;
+	box-sizing:border-box;
+}
+
+#app {
+	min-height: 100vh;
+	width: 100vw;
+
+  margin-inline: auto;
+  text-align: center;
+}
