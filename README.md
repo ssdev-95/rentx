@@ -8,6 +8,6 @@ An app where one can rent cars  at affordables prices.
 
 - [ ] [Web Version](https://github.com/xSallus/rentx/tree/main/web)
 
-- [ ] [Api Version]()
+- [ ] Api Version
 
-- [ ] [Mobile Version]()
+- [ ] Mobile Version
