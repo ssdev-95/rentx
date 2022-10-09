@@ -14,6 +14,9 @@ export const useShowroomStore = defineStore(
 		getters: {
 			getShowroom(state) {
 				return state.cars
+			},
+			getCarById(state) {
+				return (carId:string) => state.cars.find(item => item.id === carId)
 			}
 		},
 		actions: {

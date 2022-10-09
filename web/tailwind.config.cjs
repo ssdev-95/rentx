@@ -10,6 +10,7 @@ module.exports = {
       },
       screens: {
         mb: { max: '869px' },
+				md: { min: '869px' }
       },
       backgroundImage: {
         'grade-gray': "url('./src/assets/rect_bg_gray.svg')",
