@@ -1,9 +1,29 @@
 <script setup lang="ts">
-  import { cars } from '../../db.ts'
+  import { onMounted, ref } from 'vue'
+	import Loading from '../components/loading.vue'
+
+	const loading = ref(true)
+
+	onMounted(() => {
+	  setTimeout(() => {
+		  loading.value = false
+		}, 3000)
+	})
 </script>
 
 <template>
   <main
+	  v-if="loading"
+		class="min-h-screen w-screen bg-zinc-900 flex items-center justify-center"
+	>
+	  <Loading
+		  thumb="bg-zinc-900"
+			classname="bg-gradient-default"
+		/>
+	</main>
+
+  <main
+	  v-else
     class="min-h-screen w-screen max-w-[1248px] flex items-center justify-center gap-6 mb:flex-col bg-zinc-900"
   >
     <section
