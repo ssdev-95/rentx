@@ -1,6 +1,4 @@
-<script setup lang="ts">
-  console.log('lol')
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <header

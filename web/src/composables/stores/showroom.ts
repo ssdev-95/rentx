@@ -19,7 +19,6 @@ export const useShowroomStore = defineStore(
 		actions: {
 			fetchShowroom() {
 				this.cars = [...cars]
-				console.log(this.cars)
 		 }
 		}
 	}

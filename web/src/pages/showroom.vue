@@ -7,7 +7,6 @@
 	import Loading from '../components/loading.vue'
 
 	const store = useShowroomStore()
-	const cars = store.getShowroom
 
 	const loading = ref(true)
 
@@ -43,7 +42,7 @@
 		  class="w-full flex-1 pb-6 px-5 grid grid-cols-4 mb:grid-cols-1 gap-3"
 		>
 	  	<Card
-			  v-for="car in cars"
+			  v-for="car in store.getShowroom"
 				:key="car.id"
 				:car="car"
 			/>
