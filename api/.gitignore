@@ -10,3 +10,4 @@ src/db.ts
 
 #database
 src/typeorm/database/
+.env
