@@ -1,6 +1,6 @@
 import { Entity, Column, BaseEntity, PrimaryGeneratedColumn } from 'typeorm'
 
-@Entity()
+@Entity('customers')
 export class CustomerEntity extends BaseEntity {
  @PrimaryGeneratedColumn('uuid')
    id: string
@@ -8,7 +8,7 @@ export class CustomerEntity extends BaseEntity {
  @Column()
    firstName: string
 
- @Column()
+ @Column({ unique: true })
    email: string
 
  @Column()

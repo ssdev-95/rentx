@@ -1,9 +1,11 @@
-import { Router, Request, Response } from 'express'
+import { Router } from 'express'
+import { CreateCarController } from './controllers/cars/create'
 
 const router = Router()
 
-router.get('/', (_req: Request, res: Response) => {
-  return res.send('Hello world')
-})
+router.post(
+	'/cars/seed',
+	new CreateCarController().handle
+)
 
 export { router }

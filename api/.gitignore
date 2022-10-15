@@ -6,7 +6,7 @@ tmp/
 temp/
 
 #mocks
-db.ts
+src/db.ts
 
 #database
 src/typeorm/database/

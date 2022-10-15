@@ -16,7 +16,8 @@ export class createUsersTable1665787180336 implements MigrationInterface {
 					isGenerated: true,
 					generationStrategy: 'uuid'
 				},
-				{ name: 'firstName',
+				{
+					name: 'firstName',
 					type: 'varchar',
 					isNullable: false
 				},
@@ -28,6 +29,7 @@ export class createUsersTable1665787180336 implements MigrationInterface {
 				{
 					name: 'email',
 					type: 'varchar',
+					isUnique: true,
 					isNullable: false
 				},
 				{
