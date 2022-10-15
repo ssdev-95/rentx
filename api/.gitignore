@@ -6,4 +6,4 @@ tmp/
 temp/
 
 #mocks
-./db.ts
+db.ts
