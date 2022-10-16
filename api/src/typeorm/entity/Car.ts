@@ -3,38 +3,38 @@ import { Entity, Column, BaseEntity, PrimaryGeneratedColumn } from 'typeorm'
 @Entity('cars')
 export class CarEntity extends BaseEntity {
  @PrimaryGeneratedColumn('uuid')
-   id: string
+ id: string
 
  @Column()
-   model: string
+ model: string
 
  @Column()
-   manufacturer: string
+ manufacturer: string
 
  @Column()
-   description: string
+ description: string
 
  @Column()
-   rentPrice: number
+ rentPrice: number
 
  @Column()
-   igniteTime: number
+ igniteTime: number
 
  @Column()
-   maxPassengers: number
+ maxPassengers: number
 
  @Column()
-   maxSpeed: number
+ maxSpeed: number
 
  @Column()
-   fuelType: string
+ fuelType: string
 
  @Column()
-   cambioMode: string
+ cambioMode: string
 
  @Column()
-   horsePower: number
+ horsePower: number
 
  @Column()
-   thumbs: string
+ thumbs: string
 }

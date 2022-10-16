@@ -1,19 +1,24 @@
-import { Entity, Column, BaseEntity, PrimaryGeneratedColumn } from 'typeorm'
+import {
+ Entity,
+ Column,
+ BaseEntity,
+ PrimaryGeneratedColumn
+} from 'typeorm'
 
 @Entity('rents')
 export class RentEntity extends BaseEntity {
  @PrimaryGeneratedColumn('uuid')
-   id: string
+ id: string
 
  @Column()
-   carId: string
+ startRent: Date
 
  @Column()
-   customerId: string
+ endRent: Date
 
- @Column()
-   startRent: Date
+ @Column({ nullable: false})
+ customerId: string
 
- @Column()
-   endRent: Date
+ @Column({ nullable: false})
+ carId: string
 }
