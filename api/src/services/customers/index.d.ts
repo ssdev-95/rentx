@@ -1,6 +1,7 @@
 export type Customer = {
-	firstName:string
-	email:string	
-	password:string
-	avatar?:string
+ firstName?: string
+ lastName?: string
+ email: string
+ password: string
+ avatar?: string
 }
