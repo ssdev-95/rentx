@@ -9,12 +9,23 @@
 	import Tab from '../components/tab.vue'
 	import Loading from '../components/loading.vue'
 	import Indicator from '../components/indicator.vue'
+	import Modal from '../components/modal.vue'
 
 	const loading = ref(true)
+	const isModalOpen = ref(true)
+
 	const route = useRoute()
 
 	const carId = route.params.id
 	const car = useShowroomStore().getCarById(carId)
+
+	const handleOpenModal = () => {
+	  isModalOpen.value = true
+	}
+
+	const handleCloseModal = () => {
+	  isModalOpen.value = false
+	}
 
 	onMounted(() => {
 		setTimeout(() => {
@@ -49,7 +60,9 @@
 				</router-link>
 
 			  <p class="text-zinc-400 text-xs text-left">
-				  {{car.manufacturer}}
+				  <span class="uppercase">
+					  {{car.manufacturer}}
+					</span>
 
 					<strong class="text-lg block mt-1 text-zinc-800">
 					  {{car.model}}
@@ -57,9 +70,9 @@
 				</p>
 
 				<p class="text-zinc-400 text-xs text-left">
-				  DAILY
+				  RENTAL
 					<strong class="text-lg block mt-1 text-red-500">
-					  {{car.rent_price}}
+					  {{car.rentPrice}}
 					</strong>
 				</p>
 			</div>
@@ -82,7 +95,7 @@
 				<div class="max-w-[90vw] w-[400px] px-6 flex flex-col items-center justify-start p-8 mb:mx-auto mb:gap-5">
 				  <div class="grid grid-cols-2 gap-2">
 					  <ABadge
-						  :label="`${car.max_speed}km/h`"
+						  :label="`${car.maxSpeed}km/h`"
 						>
 						  <PhGauge
 							  size="28"
@@ -92,7 +105,7 @@
 						</ABadge>
 
 						<ABadge
-						  :label="`${car['0_to_100']}s`"
+						  :label="`${car.igniteTime}s`"
 						>
 						  <PhArrowUp
 							  size="28"
@@ -102,7 +115,7 @@
 						</ABadge>
 
 						<ABadge
-						  :label="car.fuel_type"
+						  :label="car.fuelType"
 						>
 						  <PhDrop
 							  size="28"
@@ -112,7 +125,7 @@
 						</ABadge>
 
 						<ABadge
-						  :label="car.cambio_mode"
+						  :label="car.cambioMode"
 						>
 						  <PhGitBranch
 							  size="28"
@@ -122,7 +135,7 @@
 						</ABadge>
 
 						<ABadge
-						  :label="`${car.max_passengers} persons`"
+						  :label="`${car.maxPassengers} persons`"
 						>
 						  <PhUser
 							  size="28"
@@ -132,7 +145,7 @@
 						</ABadge>
 
 						<ABadge
-						  :label="`${car.horse_power} HP`"
+						  :label="`${car.horsePower} HP`"
 						>
 						  <PhHorse
 							  size="28"
@@ -146,11 +159,18 @@
 					  <Tab :car="car" />
 					</div>
 
-					<button class="mt-auto mb:mt-6 bg-red-500 w-full p-5 rounded text-white text-md font-bold">
+					<button
+					  class="mt-auto mb:mt-6 bg-red-500 w-full p-5 rounded text-white text-md font-bold"
+						@click="handleOpenModal"
+					>
 					  CHOOSE RENT PERIOD
 					</button>
 				</div>
 			</div>
 		</div>
   </main>
+	<Modal
+	  :isModalOpen="isModalOpen"
+		@close="handleCloseModal"
+	/>
 </template>

@@ -1,9 +1,8 @@
 import { reactive } from 'vue'
 import { defineStore } from 'pinia'
 
-import { cars } from '../../../db'
-
-export type Car = typeof cars[0]
+import { api } from '../../services/api'
+import { Car } from '../../custom-types.d'
 
 export const useShowroomStore = defineStore(
 	'showroom', {
@@ -21,7 +20,10 @@ export const useShowroomStore = defineStore(
 		},
 		actions: {
 			fetchShowroom() {
-				this.cars = [...cars]
+				api.get<{cars:Car[]}>('/cars').then(({ data }) => {
+					const cars = data.cars
+					this.cars = [...cars]
+				}).catch(console.log)
 		 }
 		}
 	}

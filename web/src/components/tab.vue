@@ -2,7 +2,7 @@
   import { ref, watch } from 'vue'
 	import { PhCaretRight, PhCalendar } from 'phosphor-vue'
 
-	import type { Car } from '../composables/stores/showroom'
+	import type { Car } from '../../custom-types.d'
 
 	const selectedTab = ref('car')
 
@@ -96,12 +96,12 @@
 			  TOTAL
 				
 				<span class="block mt-1/2 text-md text-zinc-800">
-				  ${{car.rent_price}} x 3 dailys
+				  ${{car.rentPrice}} x 3 dailys
 				</span>
 			</p>
 
 		  <strong class="text-green-500 text-3xl font-bold">
-			  $ {{car.rent_price * 3}}
+			  $ {{car.rentPrice * 3}}
 			</strong>
 		</div>
 	</div>

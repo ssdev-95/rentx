@@ -1,4 +1,5 @@
 import './style.css'
+import 'v-calendar/dist/style.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'

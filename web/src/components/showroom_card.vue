@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { PhLightning } from 'phosphor-vue'
-  import type { Car } from '../composables/stores/showroom'
+  import { Car } from '../custom-types.d'
 
   const { car } = defineProps<{car:Car}>()
 	const href = `/car/${car.id}`
@@ -25,7 +25,7 @@
 				  Daily
 
 					<strong class="block">
-					  {{car.rent_price}}
+					  {{car.rentPrice}}
 					</strong>
 				</p>
 
