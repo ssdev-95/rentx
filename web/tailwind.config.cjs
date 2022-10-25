@@ -7,16 +7,19 @@ module.exports = {
         red: {
           600: '#DC1637',
         },
+        zinc: {
+          100: '#f0f2f5',
+        },
       },
       screens: {
         mb: { max: '869px' },
-				md: { min: '869px' }
+        md: { min: '869px' },
       },
       backgroundImage: {
         'grade-gray': "url('./src/assets/rect_bg_gray.svg')",
         'grade-red': "url('./src/assets/rect_bg_red.svg')",
-				'gradient-default': 'linear-gradient(0deg,#DC1637,transparent 95%)',
-				'gradient-white': 'linear-gradient(0deg, #f0f2f5,transparent 95%)'
+        'gradient-default': 'linear-gradient(0deg,#DC1637,transparent 95%)',
+        'gradient-white': 'linear-gradient(0deg, #f0f2f5,transparent 95%)',
       },
     },
   },
