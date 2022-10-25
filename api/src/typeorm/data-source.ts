@@ -8,11 +8,11 @@ import { RentEntity } from './entity/Rent'
 const entities = [CarEntity, RentEntity, CustomerEntity]
 
 export const AppDataSource = new DataSource({
- type: 'better-sqlite3',
- database: __dirname + '/database/db.sql',
- synchronize: true,
- logging: false,
- entities,
- migrations: [__dirname + '/migration/**/*.ts'],
- subscribers: [],
+  type: 'better-sqlite3',
+  database: __dirname + '/database/db.sql',
+  synchronize: true,
+  logging: false,
+  entities,
+  migrations: [__dirname + '/migration/**/*.ts'],
+  subscribers: [],
 })

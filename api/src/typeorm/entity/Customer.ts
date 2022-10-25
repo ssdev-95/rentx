@@ -1,27 +1,22 @@
-import {
- Entity,
- Column,
- BaseEntity,
- PrimaryGeneratedColumn
-} from 'typeorm'
+import { Entity, Column, BaseEntity, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity('customers')
 export class CustomerEntity extends BaseEntity {
  @PrimaryGeneratedColumn('uuid')
- id: string
+   id: string
 
  @Column()
- firstName: string
+   firstName: string
 
  @Column()
- lastName: string
+   lastName: string
 
  @Column({ unique: true })
- email: string
+   email: string
 
  @Column()
- password: string
+   password: string
 
  @Column({ nullable: true })
- avatar?: string
+   avatar?: string
 }
