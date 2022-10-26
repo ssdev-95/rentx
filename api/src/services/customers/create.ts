@@ -20,6 +20,7 @@ export class CreateCustomerService {
       this.entity.avatar = customer.avatar
       this.entity.firstName = customer.firstName
       this.entity.lastName = customer.lastName
+			this.entity.cnh = customer.cnh
       this.entity.email = customer.email
       this.entity.password = customer.password
 
@@ -44,9 +45,11 @@ export class CreateCustomerService {
     return {
       token,
       user: {
-        firstName: `${storedCustomer.firstName} ${storedCustomer.lastName}`,
+        firstName: storedCustomer.firstName,
+				lastName: storedCustomer.lastName,
         avatar: storedCustomer.avatar,
         email: storedCustomer.email,
+				cnh: storedCustomer.cnh
       },
     }
   }

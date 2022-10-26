@@ -7,7 +7,16 @@ export class CreateCustomerController {
   async handle(req: Request, res: Response) {
     const service = new CreateCustomerService()
 
-    const { token, user } = await service.execute(req.body)
+		const [firstName, lastName] = req.body.username.split(' ')
+
+    const { token, user } = await service.execute({
+			avatar: req.body.avatar,
+			email: req.body.email,
+			password: req.body.password,
+			cnh: Number(req.body.cnh),
+			firstName,
+			lastName
+		})
 
     res.cookie(COOKIE, token, {
       expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),

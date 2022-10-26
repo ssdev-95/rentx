@@ -1,4 +1,13 @@
-import { Entity, Column, BaseEntity, PrimaryGeneratedColumn } from 'typeorm'
+import {
+	Entity,
+	Column,
+	ManyToOne,
+	BaseEntity,
+	PrimaryGeneratedColumn
+} from 'typeorm'
+
+import { CarEntity } from './Car'
+import { CustomerEntity } from './Customer'
 
 @Entity('rents')
 export class RentEntity extends BaseEntity {
@@ -11,9 +20,11 @@ export class RentEntity extends BaseEntity {
  @Column()
    endRent: Date
 
- @Column({ nullable: false })
+ @Column()
+ @ManyToOne(() => CustomerEntity, (customer) => customer.id)
    customerId: string
 
- @Column({ nullable: false })
+ @Column()
+ @ManyToOne(() => CarEntity, (car) => car.id)
    carId: string
 }

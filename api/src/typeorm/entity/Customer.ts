@@ -11,6 +11,9 @@ export class CustomerEntity extends BaseEntity {
  @Column()
    lastName: string
 
+ @Column({ nullable: false })
+   cnh: number
+
  @Column({ unique: true })
    email: string
 
