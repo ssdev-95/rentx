@@ -13,11 +13,10 @@
 
   import { useShowroomStore } from '../composables/stores/showroom'
 
-  import Header from '../components/header.vue'
+	import BaseLayout from './layouts/default.vue'
   import ABadge from '../components/attribute-badge.vue'
   import Tab from '../components/tab.vue'
   import Loading from '../components/loading.vue'
-  import Indicator from '../components/indicator.vue'
   import Modal from '../components/modal.vue'
 
   const loading = ref(true)
@@ -50,47 +49,7 @@
 </script>
 
 <template>
-  <main
-    v-if="loading"
-    class="min-h-screen w-screen flex items-center justify-center"
-  >
-    <Loading thumb="bg-zinc-100" classname="bg-gradient-default" />
-  </main>
-
-  <main
-    v-else
-    class="min-h-screen w-screen flex flex-col items-center justify-center"
-  >
-    <Header>
-      <div class="flex gap-5 items-center">
-        <router-link to="/showroom">
-          <PhCaretLeft size="16" weight="bold" class="text-zinc-500" />
-        </router-link>
-
-        <p class="text-zinc-400 text-xs text-left">
-          <span class="uppercase">
-            {{ car.manufacturer }}
-          </span>
-
-          <strong class="text-lg block mt-1 text-zinc-800">
-            {{ car.model }}
-          </strong>
-        </p>
-
-        <p class="text-zinc-400 text-xs text-left">
-          RENTAL
-          <strong class="text-lg block mt-1 text-red-500">
-            {{ car.rentPrice }}
-          </strong>
-        </p>
-      </div>
-
-      <strong class="text-zinc-800">signin</strong>
-    </Header>
-
-    <div class="flex flex-1 w-full">
-      <Indicator active="car" />
-
+  <BaseLayout>
       <div class="min-h-full flex-1 flex mb:flex-col mb:pb-14">
         <div
           v-if="!!Object.keys(car).length"
@@ -140,7 +99,6 @@
           </button>
         </div>
       </div>
-    </div>
-  </main>
+	</BaseLayout>
   <Modal :isModalOpen="isModalOpen" @close="handleCloseModal" />
 </template>

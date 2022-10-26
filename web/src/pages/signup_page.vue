@@ -2,11 +2,13 @@
   import { Ref, ref, onMounted } from 'vue'
   import { useRouter } from 'vue-router'
   import { PhLock, PhEnvelope, PhEye, PhEyeClosed, PhUser } from 'phosphor-vue'
-  import Header from '../components/header.vue'
-  import Indicator from '../components/indicator.vue'
+
+	import BaseLayout from './layouts/default.vue'
 
   import { api } from '../services/api'
-  import { authStore } from '../composables/stores/auth'
+  import { useAuthStore } from '../composables/stores/auth'
+
+	const router = useRouter()
 
   const username: Ref<string> = ref('')
   const email: Ref<string> = ref('')
@@ -31,8 +33,6 @@
       firstName: username.value,
     }
 
-    console.log(body)
-
     const { data } = await api.post('/auth', body).catch(console.log)
 
     const user = {
@@ -40,8 +40,11 @@
       cnh: cnh.value,
     }
 
-    authStore().saveUser(user)
+		const tokeh = data.token
+
+    useAuthStore().saveUser(user)
     localStorage.setItem('@rentx:user', JSON.stringify(user))
+		localStorage.setItem('@rentx:token', token)
 
     if (user) {
       setTimeout(() => {
@@ -64,22 +67,14 @@
   onMounted(() => {
     const router = useRouter()
 
-    if (!!Object.entries(authStore().getUser).length) {
+    if (!!Object.entries(useAuthStore().getUser).length) {
       router.push('/me')
     }
   })
 </script>
 
 <template>
-  <main class="w-screen min-h-screen flex flex-col">
-    <Header>
-      <strong class="text-zinc-800">Profile</strong>
-
-      <strong class="text-zinc-800"> signin </strong>
-    </Header>
-
-    <div class="flex-1 flex">
-      <Indicator active="user" />
+  <BaseLayout>
       <div class="flex-1 flex p-10 mb:-mt-[4rem] max-w-[900px] mx-auto">
         <div class="flex-1 flex items-center justify-center">
           <div class="h-fit w-[300px] mb:w-full mx-auto flex flex-col gap-6">
@@ -199,6 +194,5 @@
           <img src="https://i.ibb.co/ftHQDpj/dodge.png" alt="" />
         </div>
       </div>
-    </div>
-  </main>
+  </BaseLayout>
 </template>
