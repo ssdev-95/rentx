@@ -1,7 +1,8 @@
 <script setup lang="ts">
   import { PhCar, PhUser, PhHouse } from 'phosphor-vue'
 
-  const { active } = defineProps<{ active: 'car' | 'user' | 'rents' }>()
+  const { active, route } = defineProps<{ active: 'car' | 'user' | 'rents', route?: string }>()
+	console.log(route)
 </script>
 
 <template>
