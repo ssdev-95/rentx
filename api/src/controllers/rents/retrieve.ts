@@ -8,7 +8,7 @@ export class RetrieveRentsController {
       const service = new RetrieveRentsService()
       const customerId = req.body.customerId
 
-      const rents = service.execute(customerId)
+      const rents = await service.execute(customerId)
       return res.json({ rents })
     } catch (error) {
       console.error(error)

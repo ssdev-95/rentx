@@ -26,17 +26,7 @@ export class createRentsTable1665791744307 implements MigrationInterface {
             name: 'endRent',
             type: 'timestamp',
             isNullable: false,
-          },
-          {
-            name: 'customerId',
-            type: 'varchar',
-            isNullable: false,
-          },
-          {
-            name: 'carId',
-            type: 'varchar',
-            isNullable: false,
-          },
+          }
         ],
       })
     )
