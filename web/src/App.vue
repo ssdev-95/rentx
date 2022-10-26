@@ -1,11 +1,13 @@
 <template>
-  <router-view></router-view>
+	<router-view></router-view>
 </template>
 
 <script setup lang="ts">
   import { onMounted, onBeforeMount } from 'vue'
+
   import { useShowroomStore } from './composables/stores/showroom'
-  import { authStore } from './composables/stores/auth'
+  import { useAuthStore } from './composables/stores/auth'
+
 
   onMounted(() => {
     useShowroomStore().fetchShowroom()
@@ -19,8 +21,6 @@
       return
     }
 
-    authStore().saveUser(JSON.parse(storedUser))
+    useAuthStore().saveUser(JSON.parse(storedUser))
   })
 </script>
-
-<style></style>
