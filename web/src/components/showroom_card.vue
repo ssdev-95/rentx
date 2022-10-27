@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { PhLightning } from 'phosphor-vue'
+	import { formatCurrency } from '../utils/format'
   import { Car } from '../custom-types.d'
 
   const { car } = defineProps<{ car: Car }>()
@@ -25,7 +26,7 @@
           Daily
 
           <strong class="block">
-            {{ car.rentPrice }}
+            {{ formatCurrency(car.rentPrice) }}
           </strong>
         </p>
 

@@ -3,6 +3,8 @@
   import { PhX } from 'phosphor-vue'
   import { Calendar, DatePicker } from 'v-calendar'
 
+	import { formatDate } from '../utils/format'
+
   const defaultDate = new Date()
 
   const props = defineProps<{ isModalOpen: boolean }>()
@@ -42,7 +44,7 @@
         </div>
 
         <div
-          class="flex flex-col min-h-[300px] min-w-[250px] mb:w-full mb:h-[250px] items-start justify-between mb:px-5 p-10"
+          class="flex flex-col mb:full md:min-h-[300px] min-w-[250px] mb:w-full mb:h-[250px] items-start mb:gap-10 md:justify-between mb:px-5 p-10"
         >
           <div class="w-full flex mb:justify-start gap-6 md:flex-col">
             <p
@@ -51,7 +53,7 @@
               FROM
 
               <strong class="block mt-1 text-zinc-700 text-xl">
-                {{ range.start }}
+                {{ formatDate(range.start.toISOString())}}
               </strong>
             </p>
 
@@ -61,7 +63,7 @@
               TO
 
               <strong class="block mt-1 text-zinc-700 text-xl">
-                {{ range.end }}
+                {{ formatDate(range.end.toISOString()) }}
               </strong>
             </p>
           </div>

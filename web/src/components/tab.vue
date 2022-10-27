@@ -1,16 +1,13 @@
 <script setup lang="ts">
-  import { ref, watch } from 'vue'
+  import { ref } from 'vue'
   import { PhCaretRight, PhCalendar } from 'phosphor-vue'
 
   import type { Car } from '../../custom-types.d'
+	import { formatCurrency, formatDate } from '../utils/format'
 
   const selectedTab = ref('car')
 
   const { car } = defineProps<{ car: Car }>()
-
-  watch(selectedTab, () => {
-    console.log(selectedTab.value)
-  })
 </script>
 
 <template>
@@ -63,7 +60,9 @@
       <p class="text-left text-sm text-zinc-400">
         FROM
 
-        <span class="block mt-1/2 text-md text-zinc-800"> 18 Aug 2022 </span>
+        <span class="block mt-1/2 text-md text-zinc-800">
+				  {{formatDate('2022-08-18T04:00:00Z')}}
+				</span>
       </p>
 
       <PhCaretRight size="16" weight="bold" class="text-zinc-400" />
@@ -71,7 +70,9 @@
       <p class="text-left text-sm text-zinc-400">
         TO
 
-        <span class="block mt-1/2 text-md text-zinc-800"> 21 Aug 2022 </span>
+        <span class="block mt-1/2 text-md text-zinc-800">
+				  {{formatDate('2022-08-21T04:00:00Z')}}
+				</span>
       </p>
 
       <button
@@ -86,12 +87,12 @@
         TOTAL
 
         <span class="block mt-1/2 text-md text-zinc-800">
-          ${{ car.rentPrice }} x 3 dailys
+          {{formatCurrency(car.rentPrice)}} x 3 dailys
         </span>
       </p>
 
       <strong class="text-green-500 text-3xl font-bold">
-        $ {{ car.rentPrice * 3 }}
+        {{formatCurrency(car.rentPrice * 3)}}
       </strong>
     </div>
   </div>
