@@ -2,7 +2,6 @@
   import { PhCar, PhUser, PhHouse } from 'phosphor-vue'
 
   const { active, route } = defineProps<{ active: 'car' | 'user' | 'rents', route?: string }>()
-	console.log(route)
 </script>
 
 <template>
@@ -16,7 +15,7 @@
         <PhHouse
           size="24"
           weight="bold"
-          :class="active === 'car' ? 'text-white' : 'text-zinc-400'"
+          :class="(route === '/showroom' || route.includes('car')) ? 'text-white' : 'text-zinc-400'"
         />
       </router-link>
 
@@ -24,7 +23,7 @@
         <PhCar
           size="24"
           weight="bold"
-          :class="active === 'rents' ? 'text-white' : 'text-zinc-400'"
+          :class="route === '/rents' ? 'text-white' : 'text-zinc-400'"
         />
       </router-link>
 
@@ -32,7 +31,7 @@
         <PhUser
           size="24"
           weight="bold"
-          :class="active === 'user' ? 'text-white' : 'text-zinc-400'"
+          :class="route.includes('me') ? 'text-white' : 'text-zinc-400'"
         />
       </router-link>
     </div>
