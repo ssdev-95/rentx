@@ -1,20 +1,10 @@
 <script setup lang="ts">
-  import { onMounted, ref } from 'vue'
   import { useShowroomStore } from '../composables/stores/showroom'
 
   import BaseLayout from './layouts/default.vue'
   import Card from '../components/showroom_card.vue'
-  import Loading from '../components/loading.vue'
 
   const store = useShowroomStore()
-
-  const loading = ref(true)
-
-  onMounted(() => {
-    setTimeout(() => {
-      loading.value = false
-    }, 3000)
-  })
 </script>
 
 <template>

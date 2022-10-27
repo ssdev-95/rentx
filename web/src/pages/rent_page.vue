@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { onMounted, onUnmounted, ref, reactive } from 'vue'
+  import { ref } from 'vue'
   import { useRoute } from 'vue-router'
   import {
     PhCaretLeft,
@@ -16,10 +16,8 @@
 	import BaseLayout from './layouts/default.vue'
   import ABadge from '../components/attribute-badge.vue'
   import Tab from '../components/tab.vue'
-  import Loading from '../components/loading.vue'
   import Modal from '../components/modal.vue'
 
-  const loading = ref(true)
   const isModalOpen = ref(false)
 
   const carId = useRoute().params.id
@@ -32,20 +30,6 @@
   const handleCloseModal = () => {
     isModalOpen.value = false
   }
-
-  let timeouts: number = []
-
-  onMounted(() => {
-    timeouts.push(
-      setTimeout(() => {
-        loading.value = false
-      }, 3000)
-    )
-  })
-
-  onUnmounted(() => {
-    timeouts.forEach(clearTimeout)
-  })
 </script>
 
 <template>
