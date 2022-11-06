@@ -1,24 +1,24 @@
 <script setup lang="ts">
-  import { reactive } from 'vue'
+  import { reactive, watch } from 'vue'
   import { PhX } from 'phosphor-vue'
-  import { Calendar, DatePicker } from 'v-calendar'
 
 	import { formatDate } from '../utils/format'
-
-  const defaultDate = new Date()
 
   const props = defineProps<{ isModalOpen: boolean }>()
 
   const emits = defineEmits(['close'])
 
-  let range = reactive({
-    start: defaultDate,
-    end: new Date(
-      defaultDate.getFullYear(),
-      defaultDate.getMonth(),
-      defaultDate.getDate() + 2
-    ),
-  })
+  let rentalPeriod:Date[] = reactive([new Date(), null])
+
+	function handleSelectRentalPeriod(value:Date[]) {
+	  value.forEach((date, index) => {
+		  rentalPeriod[index] = date
+		})
+	}
+
+	function handleSubmit() {
+	  emits('close', rentalPeriod)
+	}
 </script>
 
 <template>
@@ -30,17 +30,29 @@
       <header
         class="w-full flex-1 p-5 flex items-center justify-between bg-zinc-800 text-white text-md"
       >
-        <strong>Select start/end rent dates</strong>
+        <strong>Select rental period</strong>
 
-        <button class="" @click="emits('close')">
+        <button @click="emits('close')">
           <PhX class="text-zinc-500 text-2xl" />
         </button>
       </header>
       <div
         class="h-[300] w-[600px] mb:w-[350px] flex mb:flex-col items-center justify-center p-1"
       >
-        <div class="mb:w-full md:w-[350px]">
-          <DatePicker :modelValue="range" isRange color="red" is-expanded />
+        <div
+				  id="calendar__wrapper"
+					class="mb:w-full md:w-[350px]"
+				>
+				  <Datepicker
+					  class="w-full flex justify-center"
+					  range
+						inline
+						:minDate="new Date()"
+						:modelValue="rentalPeriod"
+						@update:modelValue="handleSelectRentalPeriod"
+						:hideNavigation="['time']"
+						:previewFormat="()=>null"
+					/>
         </div>
 
         <div
@@ -52,8 +64,11 @@
             >
               FROM
 
-              <strong class="block mt-1 text-zinc-700 text-xl">
-                {{ formatDate(range.start.toISOString())}}
+              <strong
+							  v-if="rentalPeriod[0]"
+								class="block mt-1 text-zinc-700 text-xl"
+							>
+                {{formatDate(rentalPeriod[0].toISOString())}}
               </strong>
             </p>
 
@@ -62,14 +77,18 @@
             >
               TO
 
-              <strong class="block mt-1 text-zinc-700 text-xl">
-                {{ formatDate(range.end.toISOString()) }}
+              <strong
+							  v-if="rentalPeriod[1]"
+								class="block mt-1 text-zinc-700 text-xl"
+							>
+                {{formatDate(rentalPeriod[1].toISOString())}}
               </strong>
             </p>
           </div>
 
           <button
             class="mx-auto p-3 w-full bg-red-500 text-zinc-100 text-md font-semibold"
+						@click="handleSubmit"
           >
             Confirm
           </button>
@@ -83,4 +102,10 @@
   .vc-container {
     border-width: 0;
   }
+
+	.dp__theme_light, .dp__theme_dark {
+	  --dp-border-color: transparent;
+		--dp-menu-border-color: transparent;
+		--dp-border-color-hover: transparent;
+	}
 </style>

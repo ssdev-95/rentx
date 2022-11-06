@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { ref, reactive } from 'vue'
   import { useRoute } from 'vue-router'
   import {
     PhCaretLeft,
@@ -23,12 +23,22 @@
   const carId = useRoute().params.id
   const car = useShowroomStore().getCarById(carId)
 
+
+	let rentalPeriod:Date[] = reactive([])
+
   const handleOpenModal = () => {
     isModalOpen.value = true
   }
 
-  const handleCloseModal = () => {
+  const handleCloseModal = (period?:Date[]) => {
     isModalOpen.value = false
+
+		if(period) {
+		  period.forEach((date, index) => {
+			  rentalPeriod[index] = date
+			})
+			console.log(rentalPeriod[0].toISOString())
+		}
   }
 </script>
 
@@ -72,7 +82,7 @@
           </div>
 
           <div class="w-full mt-4">
-            <Tab :car="car" />
+            <Tab :car="car" :rentalPeriod="rentalPeriod" />
           </div>
 
           <button
@@ -84,5 +94,8 @@
         </div>
       </div>
 	</BaseLayout>
-  <Modal :isModalOpen="isModalOpen" @close="handleCloseModal" />
+  <Modal
+	  :isModalOpen="isModalOpen"
+		@close="handleCloseModal"
+	/>
 </template>

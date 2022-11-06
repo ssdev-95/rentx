@@ -23,3 +23,12 @@ export function formatCurrency(value:number) {
 
 	return formattedValue
 }
+
+export function getHowManyDates(dates:Date[]) {
+	if(!dates.length) return 0;
+
+	const initialRentDay = dates[0].getDate()
+	const finallRentDay = dates[1].getDate()
+
+	return (finallRentDay - initialRentDay)
+}

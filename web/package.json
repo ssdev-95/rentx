@@ -11,10 +11,10 @@
     "pretty": "prettier --write ."
   },
   "dependencies": {
+    "@vuepic/vue-datepicker": "^3.5.3",
     "axios": "^1.1.3",
     "phosphor-vue": "^4.4.0",
     "pinia": "^2.0.22",
-    "v-calendar": "^3.0.0-alpha.8",
     "vue": "^3.2.37",
     "vue-router": "4"
   },
