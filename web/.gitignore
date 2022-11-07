@@ -25,3 +25,6 @@ dist-ssr
 
 #mocks
 db.ts
+
+# env variables
+.env

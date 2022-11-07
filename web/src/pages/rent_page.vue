@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { ref, reactive } from 'vue'
-  import { useRoute } from 'vue-router'
+  import { useRoute, useRouter } from 'vue-router'
+
   import {
     PhCaretLeft,
     PhUser,
@@ -11,14 +12,20 @@
     PhHorse,
   } from 'phosphor-vue'
 
+  import { api } from '../services/api'
   import { useShowroomStore } from '../composables/stores/showroom'
+	import { useAuthStore } from '../composables/stores/auth'
+	import { useRentStore } from '../composables/stores/rents'
 
 	import BaseLayout from './layouts/default.vue'
   import ABadge from '../components/attribute-badge.vue'
   import Tab from '../components/tab.vue'
-  import Modal from '../components/modal.vue'
+  import RentPeriodPicker from '../components/modal/rental_period_picker.vue'
+	import CarRented from '../components/modal/rent_successfull.vue'
 
-  const isModalOpen = ref(false)
+	const router = useRouter()
+  const isPickerOpen = ref(false)
+	const hasRentedACar = ref(false)
 
   const carId = useRoute().params.id
   const car = useShowroomStore().getCarById(carId)
@@ -26,20 +33,46 @@
 
 	let rentalPeriod:Date[] = reactive([])
 
-  const handleOpenModal = () => {
-    isModalOpen.value = true
+  const handleOpenPicker = () => {
+	  if(!useAuthStore().isUserLogged) {
+		  alert('Users must sign in prior to rent cars.')
+			return setTimeout(() => {
+			  router.push('/me/signin')
+			}, 1000)
+		}
+
+    isPickerOpen.value = true
   }
 
-  const handleCloseModal = (period?:Date[]) => {
-    isModalOpen.value = false
+  const handleClosePicker = (period?:Date[]) => {
+    isPickerOpen.value = false
 
 		if(period) {
 		  period.forEach((date, index) => {
 			  rentalPeriod[index] = date
 			})
-			console.log(rentalPeriod[0].toISOString())
 		}
   }
+
+	const handleRentACar = async () => {
+	  const token = localStorage.getItem('@rentx:token')
+
+	  if(rentalPeriod.length < 2) return;
+
+	  const { data } = await api.post(`/rents/${carId}`, {
+		  startRent: rentalPeriod[0],
+			endRent: rentalPeriod[1]
+		}, {
+		  headers:{
+			  Authorization: `Bearer ${token}`
+			}
+		})
+		
+		if(data) {
+		  hasRentedACar.value = true
+			useRentStore().addSingleRent(data.rent)
+		}
+	}
 </script>
 
 <template>
@@ -86,16 +119,26 @@
           </div>
 
           <button
-            class="mt-auto mb:mt-6 bg-red-500 w-full p-5 rounded text-white text-md font-bold"
-            @click="handleOpenModal"
+					  v-if="rentalPeriod.length < 2"
+            class="mt-auto mb:mt-6 bg-red-600 w-full p-5 rounded text-white text-md font-bold"
+            @click="handleOpenPicker"
           >
             CHOOSE RENT PERIOD
           </button>
+					<button
+					  v-else
+					  class="mt-auto mb:mt-6 bg-green-500 w-full p-5 rounded text-white text-md font-bold"
+						@click="handleRentACar"
+					>
+					  RENT THIS CAR
+					</button>
         </div>
       </div>
 	</BaseLayout>
-  <Modal
-	  :isModalOpen="isModalOpen"
-		@close="handleCloseModal"
+  <RentPeriodPicker
+	  :isOpen="isPickerOpen"
+		@close="handleClosePicker"
 	/>
+
+	<CarRented :isOpen="hasRentedACar" />
 </template>

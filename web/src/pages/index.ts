@@ -6,6 +6,7 @@ import RentPage from './rent_page.vue'
 import RentsPage from './rents_page.vue'
 import SigninPage from './signin_page.vue'
 import SignupPage from './signup_page.vue'
+import RecoverPage from './recover_page.vue'
 import ProfilePage from './me.vue'
 
 const routes = [
@@ -15,6 +16,7 @@ const routes = [
     { path: '/me', component: ProfilePage },
     { path: '/me/signin', component: SigninPage },
     { path: '/me/signup', component: SignupPage },
+		{ path: '/me/recover', component: RecoverPage },
 		{ path: '/rents', component: RentsPage }
 ]
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { PhDrop, PhArrowRight } from 'phosphor-vue' 
   import { useShowroomStore } from '../composables/stores/showroom'
-	import { formatDate } from '../utils/format'
+	import { formatDate, formatCurrency } from '../utils/format'
 
   const { rent } = defineProps<{ rent: { carId, startRent, endRent }}>()
 	const car = useShowroomStore().getCarById(rent.carId)
@@ -24,7 +24,7 @@
 					  RENTAL
 
 						<strong class="block text-zinc-600 text-lg -mt-[5px]">
-						  $ {{car.rentPrice}}
+						  {{formatCurrency(car.rentPrice)}}
 						</strong>
 					</p>
 
@@ -50,7 +50,7 @@
 			</span>
 
 			<div class="flex w-[60%] items-center justify-around">
-			  <strong class="text-zinc-600">
+			  <strong class="text-zinc-600 mb:text-sm">
 				  {{formatDate(rent.startRent)}}
 				</strong>
 
@@ -59,7 +59,7 @@
 					weight="bold"
 				/>
 
-			  <strong class="text-zinc-600">
+			  <strong class="text-zinc-600 mb:text-sm">
 				  {{formatDate(rent.endRent)}}
 				</strong>
 			</div>

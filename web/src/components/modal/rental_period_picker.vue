@@ -1,10 +1,11 @@
 <script setup lang="ts">
   import { reactive, watch } from 'vue'
   import { PhX } from 'phosphor-vue'
+	import ModalBase from './base.vue'
 
-	import { formatDate } from '../utils/format'
+	import { formatDate } from '../../utils/format'
 
-  const props = defineProps<{ isModalOpen: boolean }>()
+  const { isOpen } = defineProps<{ isOpen: boolean }>()
 
   const emits = defineEmits(['close'])
 
@@ -22,10 +23,7 @@
 </script>
 
 <template>
-  <div
-    v-if="isModalOpen"
-    class="fixed top-0 left-0 h-screen w-screen bg-black/70 flex items-center justify-center"
-  >
+  <ModalBase :isOpen="isOpen">
     <div class="h-fit w-fit rounded-md flex flex-col bg-white overflow-hidden">
       <header
         class="w-full flex-1 p-5 flex items-center justify-between bg-zinc-800 text-white text-md"
@@ -95,7 +93,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </ModalBase>
 </template>
 
 <style>

@@ -50,7 +50,7 @@
 		  <strong class="text-zinc-800">RentX</strong>
 
 			<strong
-			  v-if="!authStore.getUser"
+			  v-if="!authStore.isUserLogged"
 			  class="text-zinc-800"
 			>
 			  signin

@@ -4,6 +4,8 @@
 
 <template>
   <BaseLayout>
-	  <div></div>
+	  <div>
+		  <h1>Recover password page.</h1>
+		</div>
 	</BaseLayout>
 </template>
