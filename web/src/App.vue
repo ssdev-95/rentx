@@ -7,10 +7,16 @@
 
   import { useShowroomStore } from './composables/stores/showroom'
   import { useAuthStore } from './composables/stores/auth'
+	import { useRentStore } from './composables/stores/rents'
 
 
   onMounted(() => {
     useShowroomStore().fetchShowroom()
+		const token = localStorage.getItem('@rentx:token')
+
+		if(useAuthStore().getUser && token) {
+		  useRentStore().fetchRents(token)
+		}
   })
 
   onBeforeMount(() => {

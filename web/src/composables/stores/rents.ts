@@ -1,5 +1,6 @@
 import { reactive } from 'vue'
 import { defineStore } from 'pinia'
+import { api } from '../../services/api'
 
 interface Rent {
   id: string
@@ -9,7 +10,7 @@ interface Rent {
 	endRent: string
 }
 
-export const useRentsStore = defineStore('rent', {
+export const useRentStore = defineStore('rent', {
     state: () => {
         const rents:Rent[] = reactive([])
 
@@ -21,8 +22,13 @@ export const useRentsStore = defineStore('rent', {
         },
     },
     actions: {
-        saveRents(rents:Rent[]) {
-            this.rents = [...rents]
+        fetchRents(token:string) {
+					api.get('/rents', {headers: {
+						'Authorization': `Bearer ${token}`
+					}}).then(({data}) => {
+						this.$state.rents = data.rents
+					})
+					.catch(console.log)
         },
         addSingleRent(rent:Rent) {
             this.$state.rents = [

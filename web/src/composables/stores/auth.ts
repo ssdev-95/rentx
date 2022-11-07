@@ -19,6 +19,9 @@ export const useAuthStore = defineStore('auth', {
         getUser(state) {
             return state.user
         },
+				isUserLogged(state) {
+					return !!Object.values(state.user).length
+				}
     },
     actions: {
         saveUser(user: User) {

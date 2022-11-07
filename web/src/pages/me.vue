@@ -7,11 +7,10 @@
 	import RentCard from '../components/rent_card.vue'
 
   import { useAuthStore } from '../composables/stores/auth'
-	import { useRentsStore } from '../composables/stores/rents'
-	import { api } from '../services/api'
+	import { useRentStore } from '../composables/stores/rents'
+
 	const router = useRouter()
   const authStore = useAuthStore()
-	const rentsStore = useRentsStore()
 
 	let name = ref(
 	  `${authStore.getUser.firstName} ${authStore.getUser.lastName}`
@@ -30,19 +29,6 @@
 
 		router.push('/me/signin')
 	}
-
-	onMounted(() => {
-	  if(authStore.getUser) {
-		  const token = localStorage.getItem('@rentx:token')
-
-  	  api.get('/rents', {headers: {
-			  'Authorization': `Bearer ${token}`
-	  	}}).then(({data}) => {
-			  rentsStore.saveRents(data.rents)
-			})
-  		.catch(console.log)
-		}
-	})
 </script>
 
 <template>
@@ -203,7 +189,7 @@
 					
 					<div class="flex-1 flex flex-col gap-4 justify-start">
 					  <RentCard
-						  v-for="rent in rentsStore.getRents"
+						  v-for="rent in useRentStore().getRents"
 							:key="rent.id"
 							:rent="rent"
 						/>

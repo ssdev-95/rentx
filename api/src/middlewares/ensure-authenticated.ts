@@ -17,9 +17,12 @@ export function ensureAuthenticated(
     })
   }
 
-	const decoded:any = jwt.decode(token)
+	const secret = process.env.JWT_SECRET
+	const isValidToken = jwt.verify(token, secret) as jwt.JwtPayload
 
-	req.body.customerId = decoded.id
+	console.log(isValidToken)
+
+	req.body.customerId = isValidToken.id
 
   return next()
 }

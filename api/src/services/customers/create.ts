@@ -10,13 +10,18 @@ export class CreateCustomerService {
   }
 
   async execute(customer: Customer) {
-    const cutsomerAlreadyExists = await CustomerEntity.findOne({
-      where: { email: customer.email },
-    })
+		let storedCustomer: CustomerEntity
 
-    let storedCustomer: CustomerEntity
-
-    if (!cutsomerAlreadyExists) {
+		try {
+			storedCustomer = await CustomerEntity.findOneOrFail({
+				where: {
+					email: customer.email,
+					password: customer.password
+				}
+			})
+		} catch(error) {
+			console.log(error)
+	
       this.entity.avatar = customer.avatar
       this.entity.firstName = customer.firstName
       this.entity.lastName = customer.lastName
@@ -25,8 +30,6 @@ export class CreateCustomerService {
       this.entity.password = customer.password
 
       storedCustomer = await this.entity.save()
-    } else {
-      storedCustomer = cutsomerAlreadyExists
     }
 
     const secret = process.env.JWT_SECRET
