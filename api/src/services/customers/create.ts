@@ -10,22 +10,22 @@ export class CreateCustomerService {
   }
 
   async execute(customer: Customer) {
-		let storedCustomer: CustomerEntity
+    let storedCustomer: CustomerEntity
 
-		try {
-			storedCustomer = await CustomerEntity.findOneOrFail({
-				where: {
-					email: customer.email,
-					password: customer.password
-				}
-			})
-		} catch(error) {
-			console.log(error)
-	
+    try {
+      storedCustomer = await CustomerEntity.findOneOrFail({
+        where: {
+          email: customer.email,
+          password: customer.password,
+        },
+      })
+    } catch (error) {
+      console.log(error)
+
       this.entity.avatar = customer.avatar
       this.entity.firstName = customer.firstName
       this.entity.lastName = customer.lastName
-			this.entity.cnh = customer.cnh
+      this.entity.cnh = customer.cnh
       this.entity.email = customer.email
       this.entity.password = customer.password
 
@@ -49,10 +49,10 @@ export class CreateCustomerService {
       token,
       user: {
         firstName: storedCustomer.firstName,
-				lastName: storedCustomer.lastName,
+        lastName: storedCustomer.lastName,
         avatar: storedCustomer.avatar,
         email: storedCustomer.email,
-				cnh: storedCustomer.cnh
+        cnh: storedCustomer.cnh,
       },
     }
   }

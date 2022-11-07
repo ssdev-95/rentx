@@ -6,10 +6,7 @@ export function ensureAuthenticated(
   res: Response,
   next: NextFunction
 ) {
-  const token = req.headers.authorization.replace(
-		'Bearer ',
-		''
-	)
+  const token = req.headers.authorization.replace('Bearer ', '')
 
   if (!token) {
     return res.status(401).json({
@@ -17,12 +14,10 @@ export function ensureAuthenticated(
     })
   }
 
-	const secret = process.env.JWT_SECRET
-	const isValidToken = jwt.verify(token, secret) as jwt.JwtPayload
+  const secret = process.env.JWT_SECRET
+  const isValidToken = jwt.verify(token, secret) as jwt.JwtPayload
 
-	console.log(isValidToken)
-
-	req.body.customerId = isValidToken.id
+  req.body.customerId = isValidToken.id
 
   return next()
 }

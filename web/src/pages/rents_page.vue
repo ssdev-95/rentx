@@ -5,5 +5,5 @@
 <template>
   <BaseLayout>
     <div></div>
-	</BaseLayout>
+  </BaseLayout>
 </template>

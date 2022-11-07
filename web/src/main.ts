@@ -11,10 +11,13 @@ import { pinia } from './composables/pinia'
 import eruda from 'eruda'
 import erudaDOM from 'eruda-dom'
 
-createApp(App).component('Datepicker',Datepicker).use(router).use(pinia).mount('#app')
+createApp(App)
+    .component('Datepicker', Datepicker)
+    .use(router)
+    .use(pinia)
+    .mount('#app')
 
 if (window && window.innerWidth <= 869 && import.meta.env.DEV) {
     eruda.init()
     eruda.add(erudaDOM)
 }
-
