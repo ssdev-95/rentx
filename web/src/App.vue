@@ -1,5 +1,5 @@
 <template>
-	<router-view></router-view>
+  <router-view></router-view>
 </template>
 
 <script setup lang="ts">
@@ -7,16 +7,15 @@
 
   import { useShowroomStore } from './composables/stores/showroom'
   import { useAuthStore } from './composables/stores/auth'
-	import { useRentStore } from './composables/stores/rents'
-
+  import { useRentStore } from './composables/stores/rents'
 
   onMounted(() => {
     useShowroomStore().fetchShowroom()
-		const token = localStorage.getItem('@rentx:token')
+    const token = localStorage.getItem('@rentx:token')
 
-		if(useAuthStore().getUser && token) {
-		  useRentStore().fetchRents(token)
-		}
+    if (useAuthStore().getUser && token) {
+      useRentStore().fetchRents(token)
+    }
   })
 
   onBeforeMount(() => {

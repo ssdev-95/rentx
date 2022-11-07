@@ -3,13 +3,14 @@
   import { PhCaretRight, PhCalendar } from 'phosphor-vue'
 
   import type { Car } from '../../custom-types.d'
-	import { formatCurrency, formatDate, getHowManyDates } from '../utils/format'
+  import { formatCurrency, formatDate, getHowManyDates } from '../utils/format'
 
   const selectedTab = ref('car')
 
   const { car, rentalPeriod } = defineProps<{
-	  car: Car, rentalPeriod:Date[]
-	}>()
+    car: Car
+    rentalPeriod: Date[]
+  }>()
 </script>
 
 <template>
@@ -63,8 +64,8 @@
         FROM
 
         <span class="block mt-1/2 text-md text-zinc-800">
-				  {{formatDate(rentalPeriod[0].toISOString())}}
-				</span>
+          {{ formatDate(rentalPeriod[0].toISOString()) }}
+        </span>
       </p>
 
       <PhCaretRight size="16" weight="bold" class="text-zinc-400" />
@@ -73,8 +74,8 @@
         TO
 
         <span class="block mt-1/2 text-md text-zinc-800">
-				  {{formatDate(rentalPeriod[1].toISOString())}}
-				</span>
+          {{ formatDate(rentalPeriod[1].toISOString()) }}
+        </span>
       </p>
 
       <button
@@ -89,12 +90,13 @@
         TOTAL
 
         <span class="block mt-1/2 text-md text-zinc-800">
-          {{formatCurrency(car.rentPrice)}} x {{getHowManyDates(rentalPeriod)}} dailys
+          {{ formatCurrency(car.rentPrice) }} x
+          {{ getHowManyDates(rentalPeriod) }} dailys
         </span>
       </p>
 
       <strong class="text-green-500 text-3xl font-bold">
-        {{formatCurrency(car.rentPrice * getHowManyDates(rentalPeriod))}}
+        {{ formatCurrency(car.rentPrice * getHowManyDates(rentalPeriod)) }}
       </strong>
     </div>
   </div>

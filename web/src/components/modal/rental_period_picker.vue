@@ -1,25 +1,25 @@
 <script setup lang="ts">
   import { reactive, watch } from 'vue'
   import { PhX } from 'phosphor-vue'
-	import ModalBase from './base.vue'
+  import ModalBase from './base.vue'
 
-	import { formatDate } from '../../utils/format'
+  import { formatDate } from '../../utils/format'
 
   const { isOpen } = defineProps<{ isOpen: boolean }>()
 
   const emits = defineEmits(['close'])
 
-  let rentalPeriod:Date[] = reactive([new Date(), null])
+  let rentalPeriod: Date[] = reactive([new Date(), null])
 
-	function handleSelectRentalPeriod(value:Date[]) {
-	  value.forEach((date, index) => {
-		  rentalPeriod[index] = date
-		})
-	}
+  function handleSelectRentalPeriod(value: Date[]) {
+    value.forEach((date, index) => {
+      rentalPeriod[index] = date
+    })
+  }
 
-	function handleSubmit() {
-	  emits('close', rentalPeriod)
-	}
+  function handleSubmit() {
+    emits('close', rentalPeriod)
+  }
 </script>
 
 <template>
@@ -37,20 +37,17 @@
       <div
         class="h-[300] w-[600px] mb:w-[350px] flex mb:flex-col items-center justify-center p-1"
       >
-        <div
-				  id="calendar__wrapper"
-					class="mb:w-full md:w-[350px]"
-				>
-				  <Datepicker
-					  class="w-full flex justify-center"
-					  range
-						inline
-						:minDate="new Date()"
-						:modelValue="rentalPeriod"
-						@update:modelValue="handleSelectRentalPeriod"
-						:hideNavigation="['time']"
-						:previewFormat="()=>null"
-					/>
+        <div id="calendar__wrapper" class="mb:w-full md:w-[350px]">
+          <Datepicker
+            class="w-full flex justify-center"
+            range
+            inline
+            :minDate="new Date()"
+            :modelValue="rentalPeriod"
+            @update:modelValue="handleSelectRentalPeriod"
+            :hideNavigation="['time']"
+            :previewFormat="() => null"
+          />
         </div>
 
         <div
@@ -63,10 +60,10 @@
               FROM
 
               <strong
-							  v-if="rentalPeriod[0]"
-								class="block mt-1 text-zinc-700 text-xl"
-							>
-                {{formatDate(rentalPeriod[0].toISOString())}}
+                v-if="rentalPeriod[0]"
+                class="block mt-1 text-zinc-700 text-xl"
+              >
+                {{ formatDate(rentalPeriod[0].toISOString()) }}
               </strong>
             </p>
 
@@ -76,17 +73,17 @@
               TO
 
               <strong
-							  v-if="rentalPeriod[1]"
-								class="block mt-1 text-zinc-700 text-xl"
-							>
-                {{formatDate(rentalPeriod[1].toISOString())}}
+                v-if="rentalPeriod[1]"
+                class="block mt-1 text-zinc-700 text-xl"
+              >
+                {{ formatDate(rentalPeriod[1].toISOString()) }}
               </strong>
             </p>
           </div>
 
           <button
             class="mx-auto p-3 w-full bg-red-500 text-zinc-100 text-md font-semibold"
-						@click="handleSubmit"
+            @click="handleSubmit"
           >
             Confirm
           </button>
@@ -101,9 +98,10 @@
     border-width: 0;
   }
 
-	.dp__theme_light, .dp__theme_dark {
-	  --dp-border-color: transparent;
-		--dp-menu-border-color: transparent;
-		--dp-border-color-hover: transparent;
-	}
+  .dp__theme_light,
+  .dp__theme_dark {
+    --dp-border-color: transparent;
+    --dp-menu-border-color: transparent;
+    --dp-border-color-hover: transparent;
+  }
 </style>

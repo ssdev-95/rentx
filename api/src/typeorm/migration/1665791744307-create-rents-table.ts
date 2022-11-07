@@ -26,7 +26,7 @@ export class createRentsTable1665791744307 implements MigrationInterface {
             name: 'endRent',
             type: 'timestamp',
             isNullable: false,
-          }
+          },
         ],
       })
     )

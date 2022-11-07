@@ -16,8 +16,8 @@ const routes = [
     { path: '/me', component: ProfilePage },
     { path: '/me/signin', component: SigninPage },
     { path: '/me/signup', component: SignupPage },
-		{ path: '/me/recover', component: RecoverPage },
-		{ path: '/rents', component: RentsPage }
+    { path: '/me/recover', component: RecoverPage },
+    { path: '/rents', component: RentsPage },
 ]
 
 const history = createWebHashHistory()

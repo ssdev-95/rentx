@@ -1,9 +1,9 @@
 import {
-	Entity,
-	Column,
-	ManyToOne,
-	BaseEntity,
-	PrimaryGeneratedColumn
+  Entity,
+  Column,
+  ManyToOne,
+  BaseEntity,
+  PrimaryGeneratedColumn,
 } from 'typeorm'
 
 import { CarEntity } from './Car'
